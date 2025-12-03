@@ -1,0 +1,3 @@
+To let a steam locomotive animation run across the terminal screen, simply type the "sl" command. 
+
+You may need to download this command, and to do so.. simply type, "sudo apt install sl"
