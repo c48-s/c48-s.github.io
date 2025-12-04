@@ -29,3 +29,50 @@
 .controls button:hover {
   background-color: #0056b3;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#countdown-timer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  font-family: Arial, sans-serif;
+  font-size: 2em;
+  color: #333;
+}
+
+.time-unit {
+  text-align: center;
+}
+
+.time-unit span {
+  display: block;
+  font-weight: bold;
+  font-size: 1.5em;
+}
+
+.time-unit .label {
+  font-size: 0.5em;
+  text-transform: uppercase;
+  color: #666;
+}
