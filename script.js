@@ -56,7 +56,7 @@ resetButton.addEventListener('click', resetTimer);
 
 
 
-const targetDate = new Date("December 31, 2025 23:59:59").getTime(); // Set your target date and time
+const targetDate = new Date("March 7, 2026 00:00:01").getTime(); // Set your target date and time
 
 const countdown = setInterval(function() {
   const now = new Date().getTime();
