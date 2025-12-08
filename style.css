@@ -1,42 +1,85 @@
-
-#countdown-timer {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 20px;
-  font-family: Arial, sans-serif;
-  font-size: 2em;
-  color: #333;
+:root{
+  --bg: #f7f7f8;
+  --fg: #0b0b0b;
+  --muted: #6b6b6b;
+  --card: #fff;
+  --accent: #0b74ff;
+  --r: 12px;
+  --space: 16px;
+  --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, 'Roboto Mono', 'Courier New', monospace;
+}
+html[data-theme='dark']{
+  --bg:#0b0b0e; --fg:#e6e6e6; --muted:#9a9a9a; --card:#111214; --accent:#6ea8ff;
 }
 
-.time-unit {
-  text-align: center;
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  background:linear-gradient(180deg, var(--bg), color-mix(in srgb, var(--bg) 92%, black 8%));
+  color:var(--fg);
+  font-family:system-ui,-apple-system,'Segoe UI',Roboto,Arial;
+  -webkit-font-smoothing:antialiased;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:calc(var(--space) * 1.5);
 }
 
-.time-unit span {
-  display: block;
-  font-weight: bold;
-  font-size: 1.5em;
+.frame{
+  width:clamp(240px,36vw,520px);
+  padding:calc(var(--space) * 1.5);
 }
 
-.time-unit .label {
-  font-size: 0.5em;
-  text-transform: uppercase;
-  color: #666;
+header{margin-bottom:12px}
+h1{margin:0; font-size:18px; font-weight:600; letter-spacing:0.2px}
+.muted{color:var(--muted); margin-top:6px; font-size:12px}
+
+.card{
+  background:var(--card);
+  padding:20px;
+  border-radius:var(--r);
+  box-shadow:0 8px 24px rgba(2,6,23,0.06);
+  display:grid;
+  gap:12px;
+  place-items:center;
+  isolation:isolate;
 }
 
+.value{
+  font-size:44px;
+  font-weight:700;
+  font-family: var(--mono);
+  line-height:1;
+  color:var(--fg);
+  min-width:4ch;
+  text-align:center;
+}
 
+.controls{
+  display:flex;
+  gap:8px;
+}
 
+button{
+  appearance:none;
+  border:0;
+  background:transparent;
+  padding:8px 12px;
+  border-radius:8px;
+  cursor:pointer;
+  color:var(--fg);
+  font-weight:600;
+  transition:transform .14s ease, background-color .14s;
+  background:color-mix(in srgb, var(--card) 88%, black 8%);
+  box-shadow:inset 0 -1px 0 rgba(0,0,0,0.03);
+}
+button:hover{ transform:translateY(-1px); filter:brightness(0.98) }
+button:active{ transform:translateY(0) scale(.996) }
 
+footer{ margin-top:12px; text-align:center; color:var(--muted); font-size:12px }
 
-
-
-
-
-
-
-
-hr {
-  margin-top: 20px;
-  margin-bottom: 20px;
+@media (max-width:420px){
+  .frame{ padding:12px }
+  .value{ font-size:36px }
 }
