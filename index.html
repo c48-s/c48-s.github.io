@@ -1,56 +1,32 @@
-<!DOCTYPE html>
-  <html style="background-color: black">
-    <head> 
-      <meta charset="UTF-8">
-      <link rel="stylesheet" href="style.css" />
-      <link rel="scriptsheet" href="script.js" />
-      <title>LinuxTerminalToys&Commands</title>
-    </head>
-    <body style="text-align: center; color:white">
-      <h1>Welcome. I am c48-s.</h1>
-      <h2>Linux terminal toys for bored people.</h2>
-      <hr>
-      <p1> Linux has many terminal commands. Including:
-      'sl' <br />
-      'aafire' <br />
-      'cmatirx' <br />
-      'cowsay' <br />
-   And many others. <br />
-        <hr>
-        <h2> Here, we will go through all the good ones, and how to get them installed and ready on your computer. </h2>
-        <h3>Installations.</h3>
-        <p> Now, in order to install anything through your linux terminal, you need this-<strong>'sudo apt install (toy insert here)'</strong></p>
-        
-        <hr>
-      
-          1.'sl' is an animation of a steam locomotive that goes across your terminal screen. <br />
-          2. 'cmatrix' is an animation that has the famous matrix fill your screen with this cool little toy! <br />
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Linux.</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="frame" role="main">
+    <header>
+      <h1>LinuxLovers</h1>
+      <p class="muted">Terminal toys for the bored —</p>
+    </header>
 
+    <section class="card" aria-live="polite" aria-atomic="true">
+      <div class="value" id="value">0</div>
+      <div class="controls">
+        <button id="inc" type="button" aria-label="Increment">+</button>
+        <button id="reset" type="button" aria-label="Reset">⟲</button>
+        <button id="toggle" type="button" aria-label="Toggle theme">●</button>
+      </div>
+    </section>
 
+    <footer>
+      <small>v1 • c48-s</small>
+    </footer>
+  </main>
 
-
-
-
-<div id="countdown-timer">
-  <div class="time-unit">
-    <span id="days">00</span>
-    <div class="label">Days</div>
-  </div>
-  <div class="time-unit">
-    <span id="hours">00</span>
-    <div class="label">Hours</div>
-  </div>
-  <div class="time-unit">
-    <span id="minutes">00</span>
-    <div class="label">Minutes</div>
-  </div>
-  <div class="time-unit">
-    <span id="seconds">00</span>
-    <div class="label">Seconds</div>
-  </div>
-</div>
-
-
-    yo  
-    </body>
-  </html>
+  <script type="module" src="app.js"></script>
+</body>
+</html>
