@@ -1,32 +1,108 @@
+
 <!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Linux.</title>
-  <link rel="stylesheet" href="style.css">
+  <title>Terminal Toys™ — chaotic linux commands menu</title>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Press+Start+2P&family=Inter:wght@300;600;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="assets/styles.css">
 </head>
 <body>
-  <main class="frame" role="main">
-    <header>
-      <h1>LinuxLovers</h1>
-      <p class="muted">Terminal toys for the bored —</p>
-    </header>
+  <div id="page">
+    <aside id="sidebar" class="open">
+      <header class="sidebar-header">
+        <div class="logo">
+          <span class="sparkle">✨</span>
+          <span class="big">TERMINAL TOYS</span>
+          <span class="tiny">for bored linux kids</span>
+        </div>
+        <button id="toggleSidebar" aria-label="Toggle menu">☰</button>
+      </header>
 
-    <section class="card" aria-live="polite" aria-atomic="true">
-      <div class="value" id="value">0</div>
-      <div class="controls">
-        <button id="inc" type="button" aria-label="Increment">+</button>
-        <button id="reset" type="button" aria-label="Reset">⟲</button>
-        <button id="toggle" type="button" aria-label="Toggle theme">●</button>
+      <div class="search-wrap">
+        <input id="cmdSearch" type="search" placeholder="search commands... (try: grep, apt, ssh)" />
+        <div class="search-hint">type & hit enter to jump</div>
       </div>
-    </section>
 
-    <footer>
-      <small>v1 • c48-s</small>
-    </footer>
-  </main>
+      <nav id="menu">
+        <div class="menu-controls">
+          <button id="expandAll" class="btn-teen">Explode All</button>
+          <button id="collapseAll" class="btn-teen ghost">Hide All</button>
+          <button id="addCmdBtn" class="btn-teen tiny">+ Add command</button>
+        </div>
 
-  <script type="module" src="app.js"></script>
+        <div id="alphabetical"></div>
+      </nav>
+
+      <footer class="sidebar-footer">
+        <div class="disclaimer">made in CSS & chaos.</div>
+      </footer>
+    </aside>
+
+    <main id="main">
+      <div class="header-ribbon">
+        <div class="title">
+          <h1 id="mainTitle">Pick a command — or create your own</h1>
+          <div class="subtitle">this site looks like it was coded during a sleepover</div>
+        </div>
+        <div class="header-stickers">
+          <img class="sticker" src="https://i.imgur.com/7u5mG7S.png" alt="sticker" />
+        </div>
+      </div>
+
+      <section id="content">
+        <div id="intro" class="card neon">
+          <h2>Welcome to Terminal Toys</h2>
+          <p>Use the left menu to explore commands. It's a playful directory — click any command to view a short description and examples. You can also add your own commands locally.</p>
+          <div class="examples-quick">
+            <span class="glitch">ls</span> <span class="glow">cat</span> <span class="spark">grep</span> <span class="pop">sudo</span>
+          </div>
+        </div>
+
+        <div id="cmdDetail" class="card hidden neon">
+          <div class="cmd-header">
+            <div>
+              <h2 id="cmdName">cmd</h2>
+              <div id="cmdDesc" class="desc">description</div>
+            </div>
+            <div class="cmd-actions">
+              <button id="copyExample" class="btn-teen">Copy example</button>
+              <button id="openRaw" class="btn-teen ghost">Raw</button>
+            </div>
+          </div>
+
+          <pre id="cmdExample" class="example"><code>// example shows here</code></pre>
+
+          <div class="cmd-extra">
+            <label>Want to edit this card?</label>
+            <button id="editCmd" class="btn-teen tiny">Edit</button>
+          </div>
+        </div>
+
+        <div id="addCmdPanel" class="card hidden neon">
+          <h3>Add a custom command (local only)</h3>
+          <form id="addCmdForm">
+            <input name="name" placeholder="command name (e.g. foo)" required />
+            <input name="desc" placeholder="short description" required />
+            <textarea name="example" placeholder="example usage"></textarea>
+            <div class="form-actions">
+              <button type="submit" class="btn-teen">Add</button>
+              <button id="cancelAdd" type="button" class="btn-teen ghost">Cancel</button>
+            </div>
+          </form>
+        </div>
+
+      </section>
+
+      <div id="floating-bubble">¯\_(ツ)_/¯</div>
+    </main>
+  </div>
+
+  <script src="assets/commands.js"></script>
+  <script src="assets/script.js"></script>
 </body>
 </html>
