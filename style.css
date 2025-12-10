@@ -1,98 +1,355 @@
-/* Teen vibe, loud and chaotic */
-:root{
+:root {
+  /* Colors */
   --bg1: #0f0020;
   --bg2: #1b0036;
   --neon1: #00ffd5;
   --neon2: #ff3dff;
   --accent: #ffb86b;
-  --glass: rgba(255,255,255,0.04);
-  --muted: rgba(255,255,255,0.6);
-  --card: rgba(0,0,0,0.45);
-  --glass-border: rgba(255,255,255,0.06);
+  --color-text: #e8eefc;
+  --color-muted: rgba(255, 255, 255, 0.6);
+  --color-dark: #03111c; /* Used for text on neon buttons */
+  
+  /* Glass/Transparency effects */
+  --glass: rgba(255, 255, 255, 0.04);
+  --glass-border: rgba(255, 255, 255, 0.06);
+  --card-bg: rgba(0, 0, 0, 0.45);
+  --sidebar-bg: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01));
+  --group-bg: linear-gradient(90deg, rgba(0, 0, 0, 0.25), rgba(255, 255, 255, 0.02));
+  --shadow-intense: 0 10px 30px rgba(0, 0, 0, 0.6);
+
+  /* Fonts */
+  --font-main: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-logo: "Permanent Marker", cursive;
+  --font-mono: "Press Start 2P", monospace;
 }
 
-*{box-sizing:border-box}
-html,body,#page{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial}
-body{
-  background: radial-gradient(600px 400px at 10% 10%, rgba(255,0,150,0.06), transparent),
-              radial-gradient(500px 300px at 90% 90%, rgba(0,200,255,0.03), transparent),
-              linear-gradient(180deg,var(--bg1),var(--bg2));
-  color: #e8eefc;
-  overflow:hidden;
-  -webkit-font-smoothing:antialiased;
-  -moz-osx-font-smoothing:grayscale;
+/* --- Base Resets & Typography --- */
+*, *::before, *::after {
+  box-sizing: border-box;
 }
 
-/* Layout */
-#page{display:flex;height:100vh;gap:12px}
-aside#sidebar{
-  width:340px;min-width:260px;max-width:420px;
-  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-  border-right:1px solid var(--glass-border);
-  padding:16px;display:flex;flex-direction:column;transition:width .28s ease;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+html, body, #page {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  background: 
+    radial-gradient(600px 400px at 10% 10%, rgba(255, 0, 150, 0.06), transparent),
+    radial-gradient(500px 300px at 90% 90%, rgba(0, 200, 255, 0.03), transparent),
+    linear-gradient(180deg, var(--bg1), var(--bg2));
+  color: var(--color-text);
+  font-family: var(--font-main);
+  overflow: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+/* --- Layout --- */
+#page {
+  display: flex;
+  height: 100vh;
+  gap: 12px;
+}
+
+aside#sidebar {
+  width: 340px;
+  min-width: 260px;
+  max-width: 420px;
+  background: var(--sidebar-bg);
+  border-right: 1px solid var(--glass-border);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  transition: width .28s ease;
+  box-shadow: var(--shadow-intense);
   backdrop-filter: blur(6px);
 }
-aside#sidebar.closed{width:72px}
-.sidebar-header{display:flex;align-items:center;gap:8px;justify-content:space-between}
-.logo{display:flex;flex-direction:column;line-height:1}
-.logo .big{font-family:"Permanent Marker",cursive;font-size:18px;color:var(--neon2);text-shadow:0 0 10px rgba(255,61,255,0.15)}
-.logo .tiny{font-size:11px;color:var(--muted)}
-#toggleSidebar{background:transparent;border:2px dashed rgba(255,255,255,0.03);padding:6px 8px;border-radius:8px;color:var(--accent);cursor:pointer}
 
-/* Search */
-.search-wrap{margin-top:12px}
-#cmdSearch{width:100%;padding:10px;border-radius:10px;border:1px solid var(--glass-border);background:transparent;color:inherit}
-.search-hint{font-size:11px;color:rgba(255,255,255,0.35);margin-top:6px}
-
-/* Menu controls */
-.menu-controls{display:flex;gap:6px;margin:12px 0;flex-wrap:wrap}
-.btn-teen{background:linear-gradient(90deg,var(--neon1),var(--neon2));border:none;color:#03111c;padding:6px 10px;border-radius:12px;cursor:pointer;font-weight:600}
-.btn-teen.ghost{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--muted)}
-.btn-teen.tiny{padding:4px 8px;font-size:13px}
-
-/* Alphabetical groups */
-#alphabetical{overflow:auto;padding-bottom:40px}
-.group{margin-bottom:10px;border-radius:8px;overflow:hidden}
-.group > .group-label{background:linear-gradient(90deg, rgba(0,0,0,0.25), rgba(255,255,255,0.02));padding:8px 10px;display:flex;justify-content:space-between;align-items:center;cursor:pointer}
-.group > ul{list-style:none;margin:0;padding:6px;background:linear-gradient(180deg, rgba(0,0,0,0.12), transparent)}
-.group li{padding:8px;border-radius:8px;margin:6px 0;display:flex;justify-content:space-between;align-items:center;cursor:pointer}
-.group li:hover{transform:translateX(6px);background:rgba(255,255,255,0.02)}
-.command-bubble{background:linear-gradient(90deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));padding:6px 10px;border-radius:999px; font-family:"Press Start 2P", monospace; font-size:11px;color:var(--neon1)}
-
-/* Main content */
-main#main{flex:1;padding:18px;overflow:auto;position:relative}
-.header-ribbon{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:16px}
-.header-ribbon .title h1{margin:0;font-family:"Permanent Marker",cursive;font-size:26px;color:var(--neon1);text-shadow:0 0 12px rgba(0,255,213,0.06)}
-.subtitle{font-size:12px;color:var(--muted)}
-.header-stickers .sticker{height:56px;transform:rotate(-8deg);filter:drop-shadow(0 8px 16px rgba(0,0,0,0.6))}
-
-/* Cards */
-.card{background:linear-gradient(135deg, rgba(255,255,255,0.02), rgba(0,0,0,0.25));border-radius:12px;padding:14px;margin-bottom:12px;border:1px solid var(--glass-border)}
-.neon{box-shadow:0 6px 32px rgba(0,0,0,0.6), 0 0 40px rgba(255,61,255,0.02)}
-
-/* Intro styling */
-.examples-quick{margin-top:10px;display:flex;gap:8px;flex-wrap:wrap}
-.examples-quick span{padding:6px 10px;border-radius:999px;background:linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));font-family:"Press Start 2P",monospace;font-size:11px}
-
-/* Command detail */
-#cmdDetail.hidden,#addCmdPanel.hidden{display:none}
-.cmd-header{display:flex;align-items:center;justify-content:space-between;gap:12px}
-.cmd-header h2{margin:0;font-family:"Press Start 2P",monospace;color:var(--neon2)}
-.desc{color:var(--muted);margin-top:6px}
-.example{background:rgba(0,0,0,0.5);padding:12px;border-radius:8px;margin-top:12px;white-space:pre-wrap;overflow:auto;color:#bfefff}
-
-/* floating bubble */
-#floating-bubble{position:fixed;right:24px;bottom:24px;background:linear-gradient(90deg,#ff69b4,#00ffd5);padding:10px 14px;border-radius:999px;color:#04111a;font-weight:700;transform:rotate(-9deg);box-shadow:0 8px 32px rgba(0,0,0,0.6)}
-
-/* small responsive */
-@media (max-width:900px){
-  aside#sidebar{position:fixed;z-index:50;left:0;top:0;bottom:0;transform:translateX(0);width:82%;max-width:420px}
-  main#main{padding:12px}
+aside#sidebar.closed {
+  width: 72px;
 }
 
-/* little animations */
-.sparkle{animation:twinkle 3s infinite}
-@keyframes twinkle{0%{opacity:0.4;transform:rotate(0)}50%{opacity:1;transform:rotate(12deg)}100%{opacity:0.4;transform:rotate(0)}}
-.group-label:after{content:"▼";font-size:12px;opacity:0.6}
-.group.collapsed > .group-label:after{content:"►"}
+main#main {
+  flex: 1;
+  padding: 18px;
+  overflow: auto;
+  position: relative;
+}
+
+/* --- UI Components --- */
+
+/* Header/Logo */
+.sidebar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.logo {
+  display: flex;
+  flex-direction: column;
+  line-height: 1;
+}
+
+.logo .big {
+  font-family: var(--font-logo);
+  font-size: 18px;
+  color: var(--neon2);
+  text-shadow: 0 0 10px rgba(255, 61, 255, 0.15);
+}
+
+.logo .tiny, .subtitle, .search-hint, .desc {
+  color: var(--color-muted);
+  font-size: 11px;
+}
+
+.logo .tiny { font-size: 11px; }
+
+/* Buttons & Inputs */
+#toggleSidebar {
+  background: transparent;
+  border: 2px dashed rgba(255, 255, 255, 0.03);
+  padding: 6px 8px;
+  border-radius: 8px;
+  color: var(--accent);
+  cursor: pointer;
+}
+
+.search-wrap { margin-top: 12px; }
+
+#cmdSearch {
+  width: 100%;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid var(--glass-border);
+  background: transparent;
+  color: inherit;
+}
+
+.search-hint { margin-top: 6px; }
+
+.menu-controls {
+  display: flex;
+  gap: 6px;
+  margin: 12px 0;
+  flex-wrap: wrap;
+}
+
+/* General button style */
+.btn-teen {
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: 600;
+  padding: 6px 10px;
+  background: linear-gradient(90deg, var(--neon1), var(--neon2));
+  color: var(--color-dark);
+}
+
+.btn-teen.ghost {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  color: var(--color-muted);
+}
+
+.btn-teen.tiny {
+  padding: 4px 8px;
+  font-size: 13px;
+}
+
+/* Cards & Groups */
+#alphabetical {
+  overflow: auto;
+  padding-bottom: 40px;
+}
+
+.group {
+  margin-bottom: 10px;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.group > .group-label {
+  background: var(--group-bg);
+  padding: 8px 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+}
+
+.group > ul {
+  padding: 6px;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.12), transparent);
+}
+
+.group li {
+  padding: 8px;
+  border-radius: 8px;
+  margin: 6px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.group li:hover {
+  transform: translateX(6px);
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.command-bubble, .examples-quick span {
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+}
+
+.command-bubble {
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01));
+  color: var(--neon1);
+}
+
+.card {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.02), rgba(0, 0, 0, 0.25));
+  border-radius: 12px;
+  padding: 14px;
+  margin-bottom: 12px;
+  border: 1px solid var(--glass-border);
+}
+
+.neon {
+  box-shadow: 0 6px 32px rgba(0, 0, 0, 0.6), 0 0 40px rgba(255, 61, 255, 0.02);
+}
+
+/* Main Content Header */
+.header-ribbon {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.header-ribbon .title h1 {
+  margin: 0;
+  font-family: var(--font-logo);
+  font-size: 26px;
+  color: var(--neon1);
+  text-shadow: 0 0 12px rgba(0, 255, 213, 0.06);
+}
+
+.header-stickers .sticker {
+  height: 56px;
+  transform: rotate(-8deg);
+  filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.6));
+}
+
+/* Intro styling */
+.examples-quick {
+  margin-top: 10px;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.examples-quick span {
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01));
+}
+
+/* Command detail */
+#cmdDetail.hidden, #addCmdPanel.hidden {
+  display: none;
+}
+
+.cmd-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.cmd-header h2 {
+  margin: 0;
+  font-family: var(--font-mono);
+  color: var(--neon2);
+}
+
+.desc {
+  margin-top: 6px;
+}
+
+.example {
+  background: rgba(0, 0, 0, 0.5);
+  padding: 12px;
+  border-radius: 8px;
+  margin-top: 12px;
+  white-space: pre-wrap;
+  overflow: auto;
+  color: #bfefff;
+}
+
+/* Floating bubble */
+#floating-bubble {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  background: linear-gradient(90deg, #ff69b4, #00ffd5);
+  padding: 10px 14px;
+  border-radius: 999px;
+  color: #04111a;
+  font-weight: 700;
+  transform: rotate(-9deg);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+}
+
+/* --- Responsive & Animations --- */
+
+/* Small screens */
+@media (max-width: 900px) {
+  aside#sidebar {
+    position: fixed;
+    z-index: 50;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    transform: translateX(0);
+    width: 82%;
+    max-width: 420px;
+  }
+
+  main#main {
+    padding: 12px;
+  }
+}
+
+/* Animations */
+.sparkle {
+  animation: twinkle 3s infinite;
+}
+
+@keyframes twinkle {
+  0% { opacity: 0.4; transform: rotate(0); }
+  50% { opacity: 1; transform: rotate(12deg); }
+  100% { opacity: 0.4; transform: rotate(0); }
+}
+
+/* Collapsible group indicators */
+.group-label:after {
+  content: "▼";
+  font-size: 12px;
+  opacity: 0.6;
+}
+
+.group.collapsed > .group-label:after {
+  content: "►";
+}
