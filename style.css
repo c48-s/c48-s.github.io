@@ -92,7 +92,7 @@ main#main{flex:1;padding:18px;overflow:auto;position:relative}
 }
 
 /* little animations */
-.sparkle{animation:twinkle 9s infinite}
+.sparkle{animation:twinkle 3s infinite}
 @keyframes twinkle{0%{opacity:0.4;transform:rotate(0)}50%{opacity:1;transform:rotate(12deg)}100%{opacity:0.4;transform:rotate(0)}}
 .group-label:after{content:"▼";font-size:12px;opacity:0.6}
 .group.collapsed > .group-label:after{content:"►"}
