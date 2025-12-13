@@ -3,18 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>2D Racing Game</title>
-    <link rel="stylesheet" href="style.css">
+    <title>3D Racing Game</title>
+    <style>
+        body { margin: 0; overflow: hidden; background-color: #f0f0f0; }
+        canvas { display: block; }
+        #stats { position: absolute; top: 10px; left: 10px; color: white; background: rgba(0,0,0,0.5); padding: 5px; font-family: monospace; }
+    </style>
 </head>
 <body>
-    <h1>Use Arrow Keys to Drive!</h1>
-    
-    <canvas id="gameCanvas" width="800" height="500"></canvas>
-    
-    <div id="stats">
-        <p>Speed: <span id="speedDisplay">0</span></p>
-    </div>
-
+    <div id="stats">Loading...</div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="game.js"></script>
 </body>
 </html>
