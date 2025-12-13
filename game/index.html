@@ -3,15 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>3D Racing Game</title>
+    <title>Realistic 3D Racing</title>
     <style>
-        body { margin: 0; overflow: hidden; background-color: #f0f0f0; }
+        body { margin: 0; overflow: hidden; font-family: sans-serif; }
         canvas { display: block; }
-        #stats { position: absolute; top: 10px; left: 10px; color: white; background: rgba(0,0,0,0.5); padding: 5px; font-family: monospace; }
+        .ui-panel { 
+            position: absolute; color: white; background: rgba(0,0,0,0.7); padding: 15px; border-radius: 8px; 
+            box-shadow: 0 0 15px rgba(0,0,0,0.5); 
+        }
+        #menu { 
+            top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center;
+            width: 80%; max-width: 500px;
+        }
+        #stats { top: 10px; left: 10px; font-size: 1.2em; }
+        #controls { bottom: 10px; right: 10px; }
+        .car-option { 
+            margin: 10px; padding: 10px; border: 2px solid gray; cursor: pointer; display: inline-block;
+            transition: all 0.2s;
+        }
+        .car-option:hover { border-color: yellow; }
+        .selected { border-color: limegreen !important; box-shadow: 0 0 10px limegreen; }
+        button { padding: 10px 20px; font-size: 1em; cursor: pointer; margin: 5px; }
     </style>
 </head>
 <body>
-    <div id="stats">Loading...</div>
+    <div id="menu" class="ui-panel">
+        <h2>Select Your Car</h2>
+        <div id="carSelection">
+            </div>
+        <button onclick="startGame()">Start Race</button>
+    </div>
+
+    <div id="stats" class="ui-panel" style="display: none;">
+        Speed: <span id="speedDisplay">0</span> km/h | Lap: <span id="lapDisplay">0/3</span>
+    </div>
+
+    <div id="controls" class="ui-panel" style="display: none;">
+        <button onclick="switchCamera()">Change View</button>
+    </div>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="game.js"></script>
 </body>
