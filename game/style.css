@@ -1,0 +1,16 @@
+body {
+    font-family: sans-serif;
+    text-align: center;
+    background-color: #f0f0f0;
+}
+
+#gameCanvas {
+    border: 5px solid #333;
+    background-color: #55aa55; /* Green for the track side */
+    display: block;
+    margin: 20px auto;
+}
+
+#stats {
+    font-size: 1.2em;
+}
