@@ -1,21 +1,8 @@
-// --- Game Constants & Assets (UPDATED) ---
+// --- Global State & Setup (UNCHANGED) ---
+// ... (All existing variables like GAME_STATE, scene, camera, renderer, etc.) ...
+// ... (CAR_DEFS array with the Pink Pacer is confirmed here) ...
 
-const MAX_SPEED = 55;
-
-// ADDED the pink car and adjusted the default colors/speeds
-const CAR_DEFS = [
-    { name: "The Racer (Red)", color: 0xff0000, maxSpeed: MAX_SPEED, acceleration: 0.5, turnSpeed: 0.05 },
-    { name: "The Cruiser (Blue)", color: 0x0000ff, maxSpeed: MAX_SPEED * 0.9, acceleration: 0.45, turnSpeed: 0.04 },
-    { name: "The Green Beast", color: 0x00ff00, maxSpeed: MAX_SPEED * 0.8, acceleration: 0.4, turnSpeed: 0.06 },
-    // ** NEW PINK CAR ADDED **
-    { name: "The Pink Aurora", color: 0xff69b4, maxSpeed: MAX_SPEED * 38, acceleration: 1.55, turnSpeed: 1.045 }
-];
-
-let cars = []; 
-// ... (All other global variables remain the same) ...
-
-
-// --- Game Menu and State Control (UPDATED) ---
+// --- Game Menu and State Control (RECONFIRMED) ---
 
 function populateMenu() {
     const menuDiv = document.getElementById('carSelection');
@@ -25,35 +12,42 @@ function populateMenu() {
         const div = document.createElement('div');
         div.className = 'car-option';
         div.textContent = def.name;
+        
         // Use the hexadecimal string representation of the color for the background
-        div.style.backgroundColor = `#${def.color.toString(16).padStart(6, '0')}`;
-        div.style.color = (def.color === 0xff69b4) ? 'black' : 'white'; // Black text on pink car for visibility
+        const hexColor = `#${def.color.toString(16).padStart(6, '0')}`;
+        div.style.backgroundColor = hexColor;
+        div.style.color = (def.color === 0xff69b4) ? 'black' : 'white'; // Set text color for visibility
+        
         div.onclick = () => {
             selectedCarIndex = index;
+            // Remove 'selected' class from all options
             document.querySelectorAll('.car-option').forEach(el => el.classList.remove('selected'));
+            // Add 'selected' class to the clicked option
             div.classList.add('selected');
         };
         menuDiv.appendChild(div);
+        
         if (index === 0) div.classList.add('selected'); // Default selection
     });
 }
 
+// NOTE: This function is called via the "Start Race" button's `onclick="startGame()"` attribute in index.html.
 function startGame() {
     if (currentState === GAME_STATE.RUNNING) return;
 
-    // 1. Clear previous cars from the scene
+    // 1. Clear previous cars and scene objects
     cars.forEach(c => scene.remove(c.mesh));
     cars = [];
 
     // 2. Initialize Player Car based on 'selectedCarIndex'
     const playerDef = CAR_DEFS[selectedCarIndex];
-    cars.push(createCar(playerDef, false, 0)); // Start at waypoint 0 (Player)
+    cars.push(createCar(playerDef, false, 0)); 
 
-    // 3. Initialize AI Opponents (using ALL other definitions, excluding the player's choice)
+    // 3. Initialize ALL other definitions as AI Opponents
     let aiStartIndex = 1;
     CAR_DEFS.forEach((def, index) => {
-        if (index !== selectedCarIndex) { // Only add if it's NOT the player's selected car
-            const newCar = createCar(def, true, aiStartIndex * 2); // Stagger start positions more widely
+        if (index !== selectedCarIndex) { // If the car is NOT the one the player chose
+            const newCar = createCar(def, true, aiStartIndex * 2); 
             cars.push(newCar);
             aiStartIndex++;
         }
@@ -68,18 +62,43 @@ function startGame() {
     document.getElementById('controls').style.display = 'block';
     currentState = GAME_STATE.RUNNING;
     
-    // Reset camera to default view
-    currentCameraIndex = 0;
-    // Position the camera to start behind the player car
+    // Reset camera to ensure a smooth start view
     const playerCar = cars.find(c => !c.isAI);
     if (playerCar) {
-        camera.position.set(playerCar.mesh.position.x, playerCar.mesh.position.y + 10, playerCar.mesh.position.z + 50);
+        camera.position.set(playerCar.mesh.position.x, playerCar.mesh.position.y + 10, playerCar.mesh.position.z - 15);
         camera.lookAt(playerCar.mesh.position);
     }
 }
 
-// ... (Rest of the file, including init() at the bottom, remains the same) ...
+
+// --- Initialization (CONFIRMED) ---
+
+function init() {
+    // ... (Existing setup: renderer, camera, event listeners, lighting, etc.) ...
+    
+    // Setup Environment (Crucial for visuals)
+    createSkybox();
+    setupLighting(); 
+    create3DTrack();
+    addForestScenery();
+    addFakeBuildings();
+
+    // SETUP MENU LOGIC BEFORE STARTING ANIMATION
+    populateMenu();
+    
+    // Window Resize and Keyboard Listeners
+    window.addEventListener('resize', () => {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+    });
+    
+    window.addEventListener('keydown', (e) => { keys[e.code] = true; });
+    window.addEventListener('keyup', (e) => { keys[e.code] = false; });
+    
+    // START THE ANIMATION LOOP
     animate();
 }
 
+// EXECUTE THE INITIALIZATION FUNCTION ONCE THE SCRIPT IS LOADED
 init();
