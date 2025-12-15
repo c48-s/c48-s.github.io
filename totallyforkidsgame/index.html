@@ -3,15 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mini 3D Game</title>
-    <style>
-        body { margin: 0; }
-        canvas { display: block; }
-    </style>
+    <title>Simple Racing Game</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/controls/OrbitControls.js"></script>
+    <h1>Simple Racing Game</h1>
+    <div class="gameArea">
+        <div class="score"></div>
+        <div class="car"></div>
+    </div>
+    
+    <div class="gameControls">
+        <button id="startBtn">Start Game</button>
+        <p>Use Left/Right Arrow Keys or 'A'/'D' to steer.</p>
+    </div>
+
     <script src="script.js"></script>
 </body>
 </html>
+
