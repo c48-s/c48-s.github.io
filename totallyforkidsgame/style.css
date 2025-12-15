@@ -1,1 +1,62 @@
+body {
+    font-family: sans-serif;
+    text-align: center;
+    background-color: #333;
+    color: white;
+}
+
+.gameArea {
+    width: 300px;
+    height: 500px;
+    background-color: #2c2c2c;
+    margin: auto;
+    position: relative;
+    overflow: hidden;
+    border: 5px solid #707070;
+}
+
+.score {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    font-size: 1.5em;
+    color: white;
+    z-index: 100;
+}
+
+.car {
+    width: 50px;
+    height: 80px;
+    background-color: red;
+    position: absolute;
+    bottom: 20px;
+    left: 125px; /* Center of the 300px road */
+    border-radius: 5px;
+}
+
+.enemy {
+    width: 50px;
+    height: 80px;
+    background-color: blue;
+    position: absolute;
+    border-radius: 5px;
+}
+
+.line {
+    width: 10px;
+    height: 100px;
+    background-color: white;
+    position: absolute;
+    margin-left: 145px; /* Center aligned dashed line */
+}
+
+.gameControls {
+    margin-top: 20px;
+}
+
+#startBtn {
+    padding: 10px 20px;
+    font-size: 1em;
+    cursor: pointer;
+}
 
