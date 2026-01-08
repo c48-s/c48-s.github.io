@@ -1,1 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chat App</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.5.1/sockjs.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+    <style>
+        body { background: #313338; color: white; font-family: sans-serif; display: flex; height: 100vh; margin: 0; }
+        #chat-page { flex: 1; display: flex; flex-direction: column; }
+        #messageArea { flex: 1; overflow-y: auto; padding: 20px; list-style-type: none; }
+        .controls { padding: 20px; background: #2b2d31; display: flex; gap: 10px; }
+        input { background: #383a40; border: none; padding: 10px; color: white; flex: 1; border-radius: 5px; }
+        button { background: #5865f2; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <div id="chat-page">
+        <ul id="messageArea"></ul>
+        <div class="controls">
+            <input type="text" id="username" placeholder="Username" style="flex: 0 0 150px;">
+            <input type="text" id="message" placeholder="Type a message...">
+            <button onclick="sendMessage()">Send</button>
+        </div>
+    </div>
+
+    <script>
+        var stompClient = null;
+
+        function connect() {
+            var socket = new SockJS('/ws');
+            stompClient = Stomp.over(socket);
+            stompClient.connect({}, function () {
+                stompClient.subscribe('/topic/public', function (payload) {
+                    var message = JSON.parse(payload.body);
+                    var el = document.createElement('li');
+                    el.innerHTML = `<b>${message.sender}:</b> ${message.content}`;
+                    document.getElementById('messageArea').appendChild(el);
+                });
+            });
+        }
+
+        function sendMessage() {
+            var content = document.getElementById('message').value;
+            var sender = document.getElementById('username').value;
+            if(content && stompClient) {
+                var chatMessage = {sender: sender, content: content};
+                stompClient.send("/app/chat.sendMessage", {}, JSON.stringify(chatMessage));
+                document.getElementById('message').value = '';
+            }
+        }
+        connect();
+    </script>
+</body>
+</html>
 
